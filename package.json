@@ -1,0 +1,19 @@
+{
+  "name": "http-firebase-proxy",
+  "version": "0.0.1",
+  "description": "Proxy HTTP requests, and record them in firebase for debugging",
+  "main": "app.js",
+  "dependencies": {
+    "firebase": "~1.1.1",
+    "underscore": "~1.7.0",
+    "http-proxy": "~1.5.3"
+  },
+  "devDependencies": {
+    "coffee-script": "~1.8.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Joshua Nussbaum",
+  "license": "MIT"
+}
