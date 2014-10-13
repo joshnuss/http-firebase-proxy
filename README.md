@@ -33,16 +33,18 @@ To set up the mapping, go to your Firebase URL /mapping, example `https://<my-fi
 Just replace the domain part of your URL with the proxy's domain:
 
 ```
-curl -v http://api.openweathermap.org/data/2.5/weather?q=Chicago,IL # use direct service
+# Use direct service
+curl -v http://api.openweathermap.org/data/2.5/weather?q=Chicago,IL
 ```
 
 ```
-curl -v http://weather.local.dev/data/2.5/weather?q=Chicago,IL # same response, but records all calls
+# Same response, but records all calls
+curl -v http://weather.local.dev/data/2.5/weather?q=Chicago,IL
 ```
 
 ### View traffic
 
-Check your firebase dashboard, you will have a `https://<my-firebase-id>.firebaseio.com/weather` and you can watch as requests come in live.
+Check your Firebase dashboard, you will have a `https://<my-firebase-id>.firebaseio.com/weather` and you can watch as requests come in live.
 
 ## License
 
