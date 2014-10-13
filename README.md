@@ -1,18 +1,21 @@
 # HTTP Firebase Proxy
 
-A node server for easily recording HTTP requests. Requests are stored in Firebase so that they can be viewed in realtime. Useful for debugging REST API calls in production.
+A node server for easily recording HTTP requests. Requests are stored in Firebase for realtime viewing. This is useful for debugging REST API calls in production.
 
-Records the request's url, ip, headers, method, body and response's code, headers and body.
+The proxy records the request's url, ip, headers, method, body and response's code, headers and body.
 
-```
+## Installation
+
+```bash
 git clone https://github.com/joshnuss/http-firebase-proxy
+npm install
 ```
 
 ## Usage
 
 ### Start the server
 
-```
+```bash
 FIREBASE_URL=<your-firebase-url> PORT=<port-number> node app.js
 ```
 
