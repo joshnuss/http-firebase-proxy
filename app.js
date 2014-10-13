@@ -38,17 +38,11 @@
   });
 
   proxy.on('proxyRes', function(proxyResponse, request, response) {
-    var alias, body, dataPath, pathParts, proxyBaseUrl, proxyPath, proxyUrl, record, requestBody;
+    var body, record, requestBody, subdomain;
     body = '';
     requestBody = '';
-    url = url.parse(request.url);
-    pathParts = url.path.split('/');
-    alias = pathParts[1];
-    proxyBaseUrl = mappings[alias];
-    proxyPath = pathParts.splice(2).join("/");
-    proxyUrl = url.parse("" + proxyBaseUrl + "/" + proxyPath);
-    dataPath = proxyUrl.hostname.replace(/[.-]/g, "-");
-    record = new Firebase("" + FIREBASE_URL + "/" + dataPath);
+    subdomain = request.headers.host.split('.')[0];
+    record = new Firebase("" + FIREBASE_URL + "/" + subdomain);
     request.on('data', function(chunk) {
       return requestBody += chunk;
     });
