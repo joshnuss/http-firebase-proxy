@@ -6,7 +6,7 @@ Firebase = require("firebase")
 
 FIREBASE_URL = process.env.FIREBASE_URL
 
-throw "Environment variable BASE_URL is not defined" unless FIREBASE_URL
+throw "Environment variable FIREBASE_URL is not defined" unless FIREBASE_URL
 
 mappingsRef = new Firebase("#{FIREBASE_URL}/mappings")
 mappings = {}

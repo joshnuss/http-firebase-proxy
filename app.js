@@ -13,7 +13,7 @@
 
   FIREBASE_URL = process.env.FIREBASE_URL;
 
-  if (!FIREBASE_URL) throw "Environment variable BASE_URL is not defined";
+  if (!FIREBASE_URL) throw "Environment variable FIREBASE_URL is not defined";
 
   mappingsRef = new Firebase("" + FIREBASE_URL + "/mappings");
 
