@@ -56,23 +56,20 @@ proxy.on 'proxyRes', (proxyResponse, request, response) ->
         body: body
 
 http.createServer (request, response) ->
-      url = url.parse(request.url)
-      pathParts = url.path.split('/')
-      alias = pathParts[1]
-      proxyBaseUrl = mappings[alias]
+      subdomain = request.headers.host.split('.')[0]
+      targetDomain = mappings[subdomain]
 
-      if !proxyBaseUrl
+      if !targetDomain
         response.writeHead(404)
         response.end("Mapping for #{request.url} not found.")
         console.log("ERROR: Mapping for #{request.url} not found.")
       else
-        proxyPath = pathParts.splice(2).join("/")
-        proxyUrl = url.parse("#{proxyBaseUrl}/#{proxyPath}")
+        targetUrl = targetDomain + url.parse(request.url).path
 
-        console.log("PROXY: from #{request.url} to #{url.format(proxyUrl)}")
+        console.log("PROXY: from #{request.headers.host}#{request.url} to #{targetUrl}")
 
-        request.url = url.format(proxyUrl)
+        request.url = targetUrl
 
-        proxy.web(request, response, {target: proxyBaseUrl})
+        proxy.web(request, response, {target: targetDomain})
 
     .listen(process.env.PORT || 1337)

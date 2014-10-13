@@ -75,22 +75,19 @@
   });
 
   http.createServer(function(request, response) {
-    var alias, pathParts, proxyBaseUrl, proxyPath, proxyUrl;
-    url = url.parse(request.url);
-    pathParts = url.path.split('/');
-    alias = pathParts[1];
-    proxyBaseUrl = mappings[alias];
-    if (!proxyBaseUrl) {
+    var subdomain, targetDomain, targetUrl;
+    subdomain = request.headers.host.split('.')[0];
+    targetDomain = mappings[subdomain];
+    if (!targetDomain) {
       response.writeHead(404);
       response.end("Mapping for " + request.url + " not found.");
       return console.log("ERROR: Mapping for " + request.url + " not found.");
     } else {
-      proxyPath = pathParts.splice(2).join("/");
-      proxyUrl = url.parse("" + proxyBaseUrl + "/" + proxyPath);
-      console.log("PROXY: from " + request.url + " to " + (url.format(proxyUrl)));
-      request.url = url.format(proxyUrl);
+      targetUrl = targetDomain + url.parse(request.url).path;
+      console.log("PROXY: from " + request.headers.host + request.url + " to " + targetUrl);
+      request.url = targetUrl;
       return proxy.web(request, response, {
-        target: proxyBaseUrl
+        target: targetDomain
       });
     }
   }).listen(process.env.PORT || 1337);
