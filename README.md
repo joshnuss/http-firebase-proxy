@@ -37,3 +37,9 @@ curl -v http://weather.local.dev/data/2.5/weather?q=Chicago,IL
 ### View traffic
 
 Check your firebase dashboard, you will have a `https://<my-firebase-id>.firebaseio.com/weather` and you can watch as requests come in live.
+
+## License
+
+MIT
+
+A project by Joshua Nussbaum, freelance software consultant. joshnuss AT gmail.com
