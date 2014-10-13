@@ -54,6 +54,7 @@
       return record.push({
         at: new Date().getTime(),
         request: {
+          ip: request.connection.remoteAddress,
           url: request.url,
           method: request.method,
           headers: request.headers,
