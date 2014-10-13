@@ -16,22 +16,28 @@ git clone https://github.com/joshnuss/http-firebase-proxy
 FIREBASE_URL=<your-firebase-url> PORT=<port-number> node app.js
 ```
 
-### Setup a subdomain mapping
+### Setup a subdomain
 
-The proxy allows recording of multiple APIs at once. To accomplish this each URL path going into the proxy uses a subdomain alias.
+The proxy can record of multiple APIs at once. Each API gets its own subdomain.
 
 For example, say you want to debug requests for the API `http://api.openweathermap.org`. If your proxy is on `http://local.dev`, you can set up a mapping for `http://weather.local.dev` to point to `http://api.openweathermap.org`.
 
-To set up the mapping, go to your Firebase URL /mapping, example `https://<my-firebase-id>.firebaseio.com/mappings`
+To set up the mapping, go to your Firebase URL /mapping, example `https://<my-firebase-id>.firebaseio.com/mappings` and add a record:
 
-Add a record, with 2 fields, `url` is the target server's URL, and `alias` is the subdomain.
+```json
+{"alias": "weather", "url": "http://api.openweathermap.org"}
+```
 
 ### Use the proxy
 
-Instead of `http://api.openweathermap.org/data/2.5/weather?q=Chicago,IL` use `http://weather.local.dev/data/2.5/weather?q=Chicago,IL`
+Just replace the domain part of your URL with the proxy's domain:
 
 ```
-curl -v http://weather.local.dev/data/2.5/weather?q=Chicago,IL
+curl -v http://api.openweathermap.org/data/2.5/weather?q=Chicago,IL # use direct service
+```
+
+```
+curl -v http://weather.local.dev/data/2.5/weather?q=Chicago,IL # same response, but records all calls
 ```
 
 ### View traffic
